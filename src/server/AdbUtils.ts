@@ -26,10 +26,24 @@ export class AdbUtils {
             const { local } = forward;
             return parseInt(local.split('tcp:')[1], 10);
         }
+
+        const hostIP = await AdbUtils.createADBConnection(serial);
+        console.log("Connect to", hostIP);
+        await this.sleep(2000);
         const port = await portfinder.getPortPromise();
         const local = `tcp:${port}`;
         await client.forward(serial, local, remote);
         return port;
+    }
+
+    public static sleep (time: number) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    public static async createADBConnection(serial: string): Promise<string> {
+        const client = Adb.createClient();
+        serial = await client.connect(serial);
+        return serial;
     }
 
     public static async getDevtoolsRemoteList(serial: string): Promise<string[]> {

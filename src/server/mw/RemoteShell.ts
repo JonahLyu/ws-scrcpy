@@ -6,6 +6,7 @@ import { IPty } from 'node-pty';
 import { Message } from '../../common/Message';
 import { XtermClientMessage, XtermServiceParameters } from '../../common/XtermMessage';
 import { ACTION } from '../Constants';
+import { AdbUtils } from '../AdbUtils';
 
 const OS_WINDOWS = os.platform() === 'win32';
 const USE_BINARY = !OS_WINDOWS;
@@ -78,6 +79,7 @@ export class RemoteShell extends Mw {
         const data: XtermClientMessage = message.data as XtermClientMessage;
         const { type } = data;
         if (type === 'start') {
+            await AdbUtils.forward(data.udid, "tcp:8886")
             this.term = this.createTerminal(data);
             this.initialized = true;
         }
