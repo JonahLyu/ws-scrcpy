@@ -40,7 +40,7 @@ export class AdbUtils {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
 
-    //create adb connection automatically!
+    //create adb connection automatically
     public static async createADBConnection(serial: string): Promise<string> {
         const client = Adb.createClient();
         serial = await client.connect(serial);
