@@ -29,7 +29,7 @@ export class AdbUtils {
 
         const hostIP = await AdbUtils.createADBConnection(serial);
         console.log("Connect to", hostIP);
-        await this.sleep(2000);
+        await this.sleep(2000); //wait 2 seconds
         const port = await portfinder.getPortPromise();
         const local = `tcp:${port}`;
         await client.forward(serial, local, remote);
