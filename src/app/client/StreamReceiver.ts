@@ -201,6 +201,8 @@ export class StreamReceiver extends ManagerClient<StreamReceiverEvents> {
     protected buildWebSocketUrl(): string {
         const proto = location.protocol === 'https:' ? 'wss' : 'ws';
         const query = this.query ? this.query : this.action ? `?action=${this.action}` : '';
-        return `${proto}://${this.host}:${this.port}${this.path}${query}`;
+        console.log(this.port) 
+        console.log(`${proto}://${this.host}/ws-scrcpy${this.path}${query}`)
+        return `${proto}://${this.host}/ws-scrcpy${this.path}${query}`;
     }
 }

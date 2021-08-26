@@ -69,7 +69,8 @@ export class ShellClient extends ManagerClient<never> {
 
     protected buildWebSocketUrl(): string {
         const proto = location.protocol === 'https:' ? 'wss' : 'ws';
-        return `${proto}://${location.host}/?action=${this.action}&`;
+        console.log(`${proto}://${location.host}/ws-scrcpy/?action=${this.action}&`)
+        return `${proto}://${location.host}/ws-scrcpy/?action=${this.action}&`;
     }
 
     private static getOrCreateContainer(udid: string): HTMLElement {
